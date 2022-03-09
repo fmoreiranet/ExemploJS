@@ -22,6 +22,7 @@ class Produto {
             baseProduto.push(produto); // Adicionando o produto na lista de produtos;
             var produtosJson = JSON.stringify(baseProduto); //Criando JSON dos objetos na baseProduto
             localStorage.setItem('produtos', produtosJson);
+            localStorage.setItem("atualizado", new Date().toString());
             //return true;
         } catch (ex) {
             console.error(ex);
@@ -43,7 +44,7 @@ class Produto {
 
     //remover produtos
 
-    //validarDados
+    //validarDados: passiva
     validData() {
         var erros = "";
         if (!this.nome || this.nome == "") {

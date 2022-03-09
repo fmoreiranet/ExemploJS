@@ -29,5 +29,18 @@ const produtoController = {
 
         tabela += "</table>";
         document.getElementById("listaProdutos").innerHTML = tabela
+    },
+    //validação reativa
+    validRequired: function () {
+        var campos = document.querySelectorAll(".required");//document.getElementsByClassName("required")
+        var erros = document.querySelectorAll(".textErro");
+
+        for (var index = 0; index < campos.length; index++) {
+            if (campos[index].value == "") {
+                erros[index].style = "display: block";
+            } else {
+                erros[index].style = "display: none";
+            }
+        }
     }
 }
