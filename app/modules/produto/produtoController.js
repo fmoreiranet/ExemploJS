@@ -1,6 +1,8 @@
 const produtoController = {
-    produto: new Produto, //Criado um produto. Ficar na memoria todo o
+    produto: new Produto, //Criado um produto. Ficar na memoria todo na memoria (Var Global)
     produtos: [],//{} um objeto  e assim [] é um veto
+
+    //Manipulação de forms
     getDataForm: function () {
         this.produto.nome = document.getElementById('nome').value;
         this.produto.descricao = document.getElementById('descricao').value;
@@ -15,16 +17,42 @@ const produtoController = {
         document.getElementById('valor').value = produto.valor;
         document.getElementById('foto').filename = produto.foto;
     },
+    //CRUD produto
     addProduto: function () {
         try {
             this.getDataForm();
-            produto.add(this.produto);
-            alert("Produto Adicionado!");
+            if (this.produto.id != null) {
+                this.produto.update(this.produto, this.produto.id);
+                alert("Produto Atualizado!");
+            } else {
+                produto.add(this.produto);
+                alert("Produto Adicionado!");
+            }
+            this.newProduto();
             this.getAllProduto();
         } catch (ex) {
             alert(ex);
         }
     },
+    getProduto: function (index = 0) {
+        //console.log(this.produtos[index]);
+        this.updateDataForm(this.produtos[index]);
+        this.produto.id = index;
+    },
+    newProduto: function () {
+        this.produto = new Produto;
+        this.updateDataForm();
+    },
+    // updateProduto() {
+    //     try {
+    //         this.getDataForm();
+    //         this.produto.update(this.produto, this.produto.id);
+    //         alert("Produto Atualizado!");
+    //         this.getAllProduto();
+    //     } catch (ex) {
+    //         alert(ex);
+    //     }
+    // },
     getAllProduto: function () {
         var produto = new Produto;
         this.produtos = produto.getAll();
@@ -50,19 +78,5 @@ const produtoController = {
             }
         }
     },
-    getProduto: function (index = 0) {
-        console.log(this.produtos[index]);
-        this.updateDataForm(this.produtos[index]);
-        this.produto.id = index;
-    },
-    updateProduto() {
-        try {
-            this.getDataForm();
-            this.produto.update(this.produto, this.produto.id);
-            alert("Produto Atualizado!");
-            this.getAllProduto();
-        } catch (ex) {
-            alert(ex);
-        }
-    }
+
 }
