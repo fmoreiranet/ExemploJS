@@ -43,10 +43,16 @@ class Produto {
 
     //atualizar produtos
     update(produto, index) {
-        var produtos = this.getAll();
-        produtos[index] = produto;
-        var produtosJson = JSON.stringify(produtos);
-        localStorage.setItem('produtos', produtosJson);
+        try {
+            this.validData();
+            var produtos = this.getAll();
+            produtos[index] = produto;
+            var produtosJson = JSON.stringify(produtos);
+            localStorage.setItem('produtos', produtosJson);
+        } catch (ex) {
+            console.error(ex);
+            throw ex;
+        }
     }
 
     //remover produtos

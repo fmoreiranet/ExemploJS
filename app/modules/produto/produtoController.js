@@ -25,7 +25,7 @@ const produtoController = {
                 this.produto.update(this.produto, this.produto.id);
                 alert("Produto Atualizado!");
             } else {
-                produto.add(this.produto);
+                this.produto.add(this.produto);
                 alert("Produto Adicionado!");
             }
             this.newProduto();
