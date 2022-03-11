@@ -1,6 +1,7 @@
 class Produto {
     constructor() {
-        this.nome = "",
+        this.id = null,
+            this.nome = "",
             this.descricao = "",
             this.quant = 0,
             this.valor = 0,
@@ -41,6 +42,12 @@ class Produto {
     }
 
     //atualizar produtos
+    update(produto, index) {
+        var produtos = this.getAll();
+        produtos[index] = produto;
+        var produtosJson = JSON.stringify(produtos);
+        localStorage.setItem('produtos', produtosJson);
+    }
 
     //remover produtos
 

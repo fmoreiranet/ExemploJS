@@ -1,19 +1,25 @@
 const produtoController = {
+    produto: new Produto, //Criado um produto. Ficar na memoria todo o
     produtos: [],//{} um objeto  e assim [] é um veto
+    getDataForm: function () {
+        this.produto.nome = document.getElementById('nome').value;
+        this.produto.descricao = document.getElementById('descricao').value;
+        this.produto.quant = parseInt(document.getElementById('quant').value);
+        this.produto.valor = parseFloat(document.getElementById('valor').value);
+        this.produto.foto1 = document.getElementById('foto').filename;
+    },
+    updateDataForm: function (produto = new Produto) {
+        document.getElementById('nome').value = produto.nome;
+        document.getElementById('descricao').value = produto.descricao;
+        document.getElementById('quant').value = produto.quant;
+        document.getElementById('valor').value = produto.valor;
+        document.getElementById('foto').filename = produto.foto;
+    },
     addProduto: function () {
         try {
-
-            var produto = new Produto;
-            produto.nome = document.getElementById('nome').value;
-            produto.descricao = document.getElementById('descricao').value;
-            produto.quant = parseInt(document.getElementById('quant').value);
-            produto.valor = parseFloat(document.getElementById('valor').value);
-            produto.foto1 = document.getElementById('foto').filename;
-            //this.produtos.push(produto);
-            //if (produto.add(produto)) {
-            produto.add(produto);
+            this.getDataForm();
+            produto.add(this.produto);
             alert("Produto Adicionado!");
-            //}
             this.getAllProduto();
         } catch (ex) {
             alert(ex);
@@ -44,24 +50,19 @@ const produtoController = {
             }
         }
     },
-    validRequired2: function () {
-        var campos = document.getElementsByClassName("required"); //document.querySelectorAll(".required")
-        var erros = document.getElementsByClassName("textErro");
-        for (var index = 0; index < campos.length; index++) {
-            if (campos[index].value == "") {
-                erros[index].style = "display: block";
-            } else {
-                erros[index].style = "display: none";
-            }
-        }
-    },
     getProduto: function (index = 0) {
         console.log(this.produtos[index]);
-        var produto = this.produtos[index];
-        document.getElementById('nome').value = produto.nome;
-        document.getElementById('descricao').value = produto.descricao;
-        document.getElementById('quant').value = produto.quant;
-        document.getElementById('valor').value = produto.valor;
-        document.getElementById('foto').filename = produto.foto;
+        this.updateDataForm(this.produtos[index]);
+        this.produto.id = index;
+    },
+    updateProduto() {
+        try {
+            this.getDataForm();
+            this.produto.update(this.produto, this.produto.id);
+            alert("Produto Atualizado!");
+            this.getAllProduto();
+        } catch (ex) {
+            alert(ex);
+        }
     }
 }
