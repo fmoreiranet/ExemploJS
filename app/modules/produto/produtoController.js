@@ -1,7 +1,8 @@
 const produtoController = {
     produto: new Produto, //Criado um produto. Ficar na memoria todo na memoria (Var Global)
     produtos: [],//{} um objeto  e assim [] é um veto
-
+    erros: false, //true = vedadeiro ou false = falso
+    botaoSalvar: document.getElementById('btnSalve'),
     //Manipulação de forms
     getDataForm: function () {
         this.produto.nome = document.getElementById('nome').value;
@@ -69,14 +70,21 @@ const produtoController = {
     validRequired: function () {
         var campos = document.querySelectorAll(".required");//document.getElementsByClassName("required")
         var erros = document.querySelectorAll(".textErro");
-
+        var contErros = 0;
         for (var index = 0; index < campos.length; index++) {
             if (campos[index].value == "") {
                 erros[index].style = "display: block";
+                contErros++;
             } else {
                 erros[index].style = "display: none";
             }
         }
-    },
-
+        if (contErros > 0) {
+            this.erros = true;
+            this.botaoSalvar.disabled = true;
+        } else {
+            this.erros = false;
+            this.botaoSalvar.disabled = false;
+        }
+    }
 }
