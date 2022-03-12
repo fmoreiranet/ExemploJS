@@ -54,13 +54,19 @@ const produtoController = {
     //         alert(ex);
     //     }
     // },
+
+    deleteProduto: function (index = 0) {
+        this.produto.delete(index);
+        this.getAllProduto();
+    },
+
     getAllProduto: function () {
         var produto = new Produto;
         this.produtos = produto.getAll();
         var tabela = "<table class='table'> <tr> <th>Nome</th> <th>Desescricao</th> <th>Quant</th> <th>Valor</th> <th>//</th> <th>X</th></tr>";
 
         for (var index = 0; index < this.produtos.length; index++) {
-            tabela += "<tr> <td>" + this.produtos[index].nome + "</td> <td>" + this.produtos[index].descricao + "</td> <td>" + this.produtos[index].quant + "</td> <td> R$" + this.produtos[index].valor.toFixed(2) + "</td> <td onclick='produtoController.getProduto(" + index + ")'>//</td> <td>X</td></tr>";
+            tabela += "<tr> <td>" + this.produtos[index].nome + "</td> <td>" + this.produtos[index].descricao + "</td> <td>" + this.produtos[index].quant + "</td> <td> R$" + this.produtos[index].valor.toFixed(2) + "</td> <td onclick='produtoController.getProduto(" + index + ")'>//</td> <td onclick='produtoController.deleteProduto(" + index + ")'>X</td></tr>";
         }
 
         tabela += "</table>";

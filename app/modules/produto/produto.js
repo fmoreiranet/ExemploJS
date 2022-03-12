@@ -61,6 +61,18 @@ class Produto {
     }
 
     //remover produtos
+    delete(index) {
+        var produtos = this.getAll();
+        // for (var i = 0; i < produtos.length; i++) {
+        //     if (produtos[i].id == this.id) {
+        //         produtos.splice(i, 1);
+        //     }
+        // }
+        produtos.splice(index, 1);
+        var produtosJson = JSON.stringify(produtos);
+        localStorage.setItem('produtos', produtosJson);
+    }
+
 
     //validarDados: passiva
     validData() {
@@ -85,4 +97,5 @@ class Produto {
             throw erros;
         }
     }
+
 }
