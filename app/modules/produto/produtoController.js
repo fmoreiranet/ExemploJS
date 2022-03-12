@@ -40,10 +40,6 @@ const produtoController = {
         this.produto.id = produto.id;
         this.updateDataForm(produto);
     },
-    newProduto: function () {
-        this.produto = new Produto;
-        this.updateDataForm();
-    },
     // updateProduto() {
     //     try {
     //         this.getDataForm();
@@ -54,12 +50,15 @@ const produtoController = {
     //         alert(ex);
     //     }
     // },
-
     deleteProduto: function (index = 0) {
         this.produto.delete(index);
         this.getAllProduto();
     },
 
+    newProduto: function () {
+        this.produto = new Produto;
+        this.updateDataForm();
+    },
     getAllProduto: function () {
         var produto = new Produto;
         this.produtos = produto.getAll();
