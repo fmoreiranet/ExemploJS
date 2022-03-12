@@ -23,7 +23,7 @@ const produtoController = {
         try {
             this.getDataForm();
             if (this.produto.id != null) {
-                this.produto.update(this.produto, this.produto.id);
+                this.produto.update();
                 alert("Produto Atualizado!");
             } else {
                 this.produto.add(this.produto);
@@ -36,9 +36,9 @@ const produtoController = {
         }
     },
     getProduto: function (index = 0) {
-        //console.log(this.produtos[index]);
-        this.updateDataForm(this.produtos[index]);
-        this.produto.id = index;
+        produto = this.produtos[index];
+        this.produto.id = produto.id;
+        this.updateDataForm(produto);
     },
     newProduto: function () {
         this.produto = new Produto;

@@ -12,15 +12,15 @@ class Produto {
 
     //Create Read Update Delete (CRUD)
     //Adicionar produto ao armazenamento
-    add(produto) {
+    add() {
         try {
             this.validData();
             var baseProduto = JSON.parse(localStorage.getItem('produtos'));//JSON.parse() -> pega um json e converte em objeto
             if (baseProduto == null) {
                 baseProduto = [];  //Criando Vetor para receber os dados do localstorage
             }
-
-            baseProduto.push(produto); // Adicionando o produto na lista de produtos;
+            this.id = Date.now();
+            baseProduto.push(this); // Adicionando o produto na lista de produtos;
             var produtosJson = JSON.stringify(baseProduto); //Criando JSON dos objetos na baseProduto
             localStorage.setItem('produtos', produtosJson);
             localStorage.setItem("atualizado", new Date().toString());
@@ -42,11 +42,16 @@ class Produto {
     }
 
     //atualizar produtos
-    update(produto, index) {
+    update() {
         try {
             this.validData();
             var produtos = this.getAll();
-            produtos[index] = produto;
+            for (var i = 0; i < produtos.length; i++) {
+                if (produtos[i].id == this.id) {
+                    produtos[i] = this;
+                }
+            }
+            //produtos[index] = produto;
             var produtosJson = JSON.stringify(produtos);
             localStorage.setItem('produtos', produtosJson);
         } catch (ex) {
